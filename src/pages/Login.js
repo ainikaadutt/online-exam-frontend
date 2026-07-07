@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../services/api";
 
@@ -5,6 +6,8 @@ function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -15,7 +18,19 @@ function Login() {
                 password: password
             });
 
-            console.log(response.data);
+            console.log("Full response:", response.data);
+
+            localStorage.setItem("token", response.data.token);
+            localStorage.setItem("role", response.data.role);
+
+            if (response.data.role === "STUDENT") {
+                navigate("/student-dashboard");
+            } else if (response.data.role === "TEACHER") {
+                navigate("/teacher-dashboard");
+            }
+
+            console.log("Login successful");
+            console.log("Token saved:", response.data.token);
 
         } catch (error) {
             console.error("Login failed", error);
