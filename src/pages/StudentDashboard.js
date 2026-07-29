@@ -13,15 +13,31 @@ function StudentDashboard() {
 
     return (
         <div>
+
             <h1>Student Dashboard</h1>
 
-            <p>
-                Welcome to the Online Examination System
-            </p>
+            <p>Welcome to the Online Examination System</p>
+
+            <button
+                onClick={() => navigate("/available-exams")}
+            >
+                Available Exams
+            </button>
+
+            {" "}
+
+            <button
+                onClick={() => navigate("/my-results")}
+            >
+                My Results
+            </button>
+
+            <br /><br />
 
             <button onClick={handleLogout}>
                 Logout
             </button>
+
         </div>
     );
 }

@@ -22,6 +22,10 @@ function TeacherDashboard() {
                 Create Exam
             </button>
 
+            <button onClick={() => navigate("/manage-exams")}>
+                Manage Exams
+            </button>
+
             <br /><br />
 
             <button onClick={handleLogout}>
