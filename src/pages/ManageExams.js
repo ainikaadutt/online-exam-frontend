@@ -103,7 +103,7 @@ function ManageExams() {
                         <td>
 
                             <button
-                                onClick={() => navigate(`/edit-exam/${exam.id}`)}
+                                onClick={() => navigate(`/teacher/exams/edit/${exam.id}`)}
                             >
                                 Edit
                             </button>
@@ -120,8 +120,7 @@ function ManageExams() {
 
                             <button
                                 onClick={() =>
-                                    navigate(`/exams/${exam.id}/questions`)
-                                }
+                                    navigate(`/teacher/exams/${exam.id}/questions`)                                }
                             >
                                 Questions
                             </button>

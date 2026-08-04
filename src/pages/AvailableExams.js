@@ -75,8 +75,7 @@ function AvailableExams() {
 
                             <button
                                 onClick={() =>
-                                    navigate(`/exam/${exam.id}`)
-                                }
+                                    navigate(`/student/exams/${exam.id}`)                                }
                             >
                                 Start Exam
                             </button>

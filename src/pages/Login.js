@@ -24,9 +24,9 @@ function Login() {
             localStorage.setItem("role", response.data.role);
 
             if (response.data.role === "STUDENT") {
-                navigate("/student-dashboard");
+                navigate("/student/dashboard");
             } else if (response.data.role === "TEACHER") {
-                navigate("/teacher-dashboard");
+                navigate("/teacher/dashboard");
             }
 
             console.log("Login successful");

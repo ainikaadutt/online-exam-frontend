@@ -19,7 +19,7 @@ function StudentDashboard() {
             <p>Welcome to the Online Examination System</p>
 
             <button
-                onClick={() => navigate("/available-exams")}
+                onClick={() => navigate("/student/exams")}
             >
                 Available Exams
             </button>

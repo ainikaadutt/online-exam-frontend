@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom";
+import AttemptExam from "./pages/AttemptExam";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ManageQuestions from "./pages/ManageQuestions";
 import Login from "./pages/Login";
@@ -8,19 +10,24 @@ import AddQuestions from "./pages/AddQuestions";
 import ManageExams from "./pages/ManageExams";
 import EditExam from "./pages/EditExam";
 import EditQuestion from "./pages/EditQuestion";
-import ProtectedRoute from "./components/ProtectedRoute";
+import ProtectedRoute from "./components/common/ProtectedRoute";
 import AvailableExams from "./pages/AvailableExams";
 function App() {
     return (
         <BrowserRouter>
             <Routes>
 
+                <Route
+                    path="/"
+                    element={<Navigate to="/login" replace />}
+                />
+
                 {/* Login */}
-                <Route path="/" element={<Login />} />
+                <Route path="/login" element={<Login />} />
 
                 {/* Student Dashboard */}
                 <Route
-                    path="/student-dashboard"
+                    path="/student/dashboard"
                     element={
                         <ProtectedRoute allowedRole="STUDENT">
                             <StudentDashboard />
@@ -30,7 +37,7 @@ function App() {
 
                 {/* Teacher Dashboard */}
                 <Route
-                    path="/teacher-dashboard"
+                    path="/teacher/dashboard"
                     element={
                         <ProtectedRoute allowedRole="TEACHER">
                             <TeacherDashboard />
@@ -38,9 +45,18 @@ function App() {
                     }
                 />
 
+                <Route
+                    path="/student/exams/:examId"
+                    element={
+                        <ProtectedRoute allowedRole="STUDENT">
+                            <AttemptExam />
+                        </ProtectedRoute>
+                    }
+                />
+
                 {/* Create Exam */}
                 <Route
-                    path="/create-exam"
+                    path="/teacher/exams/create"
                     element={
                         <ProtectedRoute allowedRole="TEACHER">
                             <CreateExam />
@@ -49,7 +65,7 @@ function App() {
                 />
 
                 <Route
-                    path="/available-exams"
+                    path="/student/exams"
                     element={
                         <ProtectedRoute allowedRole="STUDENT">
                             <AvailableExams />
@@ -60,8 +76,7 @@ function App() {
                 {/* Add Questions */}
 
                 <Route
-                    path="/exams/:examId/questions"
-                    element={
+                    path="/teacher/exams/:examId/questions"                    element={
                         <ProtectedRoute allowedRole="TEACHER">
                             <ManageQuestions />
                         </ProtectedRoute>
@@ -79,8 +94,7 @@ function App() {
 
                 {/* Manage Exams */}
                 <Route
-                    path="/manage-exams"
-                    element={
+                    path="/teacher/exams"                    element={
                         <ProtectedRoute allowedRole="TEACHER">
                             <ManageExams />
                         </ProtectedRoute>
@@ -89,8 +103,7 @@ function App() {
 
                 {/* Edit Exam */}
                 <Route
-                    path="/edit-exam/:id"
-                    element={
+                    path="/teacher/exams/edit/:id"                    element={
                         <ProtectedRoute allowedRole="TEACHER">
                             <EditExam />
                         </ProtectedRoute>

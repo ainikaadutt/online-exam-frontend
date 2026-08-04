@@ -1,38 +1,80 @@
+import DashboardLayout from "../components/layout/DashboardLayout";
+import DashboardCard from "../components/cards/DashboardCard";
+import Button from "../components/common/Button";
 import { useNavigate } from "react-router-dom";
 
 function TeacherDashboard() {
 
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        navigate("/");
-    };
-
     return (
-        <div>
-            <h1>Teacher Dashboard</h1>
 
-            <p>
-                Welcome to the Online Examination System
+        <DashboardLayout
+            title="Teacher Dashboard"
+            role="TEACHER"
+        >
+
+            <h1 style={{ marginBottom: "10px" }}>
+                Welcome, Teacher 👋
+            </h1>
+
+            <p style={{ color: "#6B7280", marginBottom: "30px" }}>
+                Manage your exams, questions and monitor student performance.
             </p>
 
-            <button onClick={() => navigate("/create-exam")}>
-                Create Exam
-            </button>
+            <div
+                style={{
+                    display: "flex",
+                    gap: "20px",
+                    flexWrap: "wrap",
+                    marginBottom: "40px"
+                }}
+            >
 
-            <button onClick={() => navigate("/manage-exams")}>
-                Manage Exams
-            </button>
+                <DashboardCard
+                    title="Total Exams"
+                    value="12"
+                />
 
-            <br /><br />
+                <DashboardCard
+                    title="Questions"
+                    value="120"
+                />
 
-            <button onClick={handleLogout}>
-                Logout
-            </button>
-        </div>
+                <DashboardCard
+                    title="Students"
+                    value="85"
+                />
+
+            </div>
+
+            <div
+                style={{
+                    display: "flex",
+                    gap: "20px"
+                }}
+            >
+
+                <Button
+                    text="Create Exam"
+                    onClick={() =>
+                        navigate("/teacher/exams/create")
+                    }
+                />
+
+                <Button
+                    text="Manage Exams"
+                    onClick={() =>
+                        navigate("/teacher/exams")
+                    }
+                />
+
+            </div>
+
+        </DashboardLayout>
+
     );
+
 }
 
 export default TeacherDashboard;
