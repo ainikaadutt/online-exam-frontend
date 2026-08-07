@@ -1,3 +1,4 @@
+import "../styles/login.css";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../services/api";
@@ -38,37 +39,59 @@ function Login() {
     };
 
     return (
-        <div>
-            <h1>Online Examination System</h1>
-            <h2>Login</h2>
+        <div className="login-page">
 
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email</label>
+            <div className="login-card">
 
-                    <input
-                        type="email"
-                        placeholder="Enter your email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+                <div className="logo">
+
+                    <h1>🎓 ExamVerse</h1>
+
+                    <p>Secure. Smart. Seamless.</p>
+
                 </div>
 
-                <div>
-                    <label>Password</label>
+                <form onSubmit={handleSubmit}>
 
-                    <input
-                        type="password"
-                        placeholder="Enter your password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
+                    <div className="form-group">
 
-                <button type="submit">
-                    Login
-                </button>
-            </form>
+                        <label>Email</label>
+
+                        <input
+                            type="email"
+                            placeholder="Enter your email"
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
+                            required
+                        />
+
+                    </div>
+
+                    <div className="form-group">
+
+                        <label>Password</label>
+
+                        <input
+                            type="password"
+                            placeholder="Enter your password"
+                            value={password}
+                            onChange={(e)=>setPassword(e.target.value)}
+                            required
+                        />
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        className="login-btn"
+                    >
+                        Login
+                    </button>
+
+                </form>
+
+            </div>
+
         </div>
     );
 }

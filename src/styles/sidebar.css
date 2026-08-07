@@ -1,56 +1,145 @@
+/* ===========================
+   EXAMVERSE SIDEBAR
+=========================== */
+
 .sidebar{
-    width:260px;
+    width:280px;
     min-height:100vh;
-    background:#1E293B;
+    background:#234E52;
     color:white;
-    padding:25px;
     display:flex;
     flex-direction:column;
+    justify-content:space-between;
+    padding:28px 22px;
+    box-shadow:4px 0 18px rgba(0,0,0,.08);
 }
 
-.logo{
-    text-align:center;
-    margin-bottom:40px;
-}
+/* ---------- Logo ---------- */
 
-.logo h2{
-    color:white;
-}
-
-.menu{
+.sidebar-logo{
     display:flex;
-    flex-direction:column;
+    align-items:center;
     gap:15px;
+    margin-bottom:45px;
 }
 
-.menu a,
-.logout-btn{
+.logo-circle{
+    width:55px;
+    height:55px;
+    border-radius:16px;
+    background:#2F855A;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    font-weight:700;
+    color:white;
+}
 
+.sidebar-logo h2{
+    font-size:24px;
+    margin:0;
+    font-weight:700;
+}
+
+.sidebar-logo p{
+    margin-top:4px;
+    color:#D9E7E3;
+    font-size:13px;
+}
+
+/* ---------- Menu ---------- */
+
+.sidebar-menu{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+    flex:1;
+}
+
+.sidebar-menu a{
     display:flex;
     align-items:center;
     gap:12px;
-
-    padding:14px;
-
-    border-radius:8px;
-
-    color:white;
-
-    transition:0.3s;
-
-    background:none;
-
-    border:none;
-
-    font-size:16px;
-
     text-decoration:none;
-
+    color:white;
+    padding:13px 16px;
+    border-radius:12px;
+    transition:.25s;
+    font-size:15px;
+    font-weight:500;
 }
 
-.menu a:hover,
+.sidebar-menu a:hover{
+    background:rgba(255,255,255,.12);
+}
+
+.sidebar-menu a.active{
+    background:#2F855A;
+}
+
+/* ---------- Menu Group ---------- */
+
+.menu-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.menu-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:white;
+    padding:13px 16px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+.menu-title span{
+    flex:1;
+    margin-left:12px;
+}
+
+.arrow{
+    font-size:12px;
+}
+
+/* ---------- Submenu ---------- */
+
+.menu-group a{
+    margin-left:38px;
+    padding:10px 12px;
+    font-size:14px;
+    color:#DDE9E6;
+}
+
+.menu-group a:hover{
+    color:white;
+    background:rgba(255,255,255,.08);
+}
+
+.sub-active{
+    color:white !important;
+    background:rgba(255,255,255,.15);
+}
+
+/* ---------- Logout ---------- */
+
+.logout-btn{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 16px;
+    border:none;
+    border-radius:12px;
+    background:transparent;
+    color:white;
+    cursor:pointer;
+    font-size:15px;
+    transition:.25s;
+}
+
 .logout-btn:hover{
-
-    background:#2563EB;
-
+    background:#C0392B;
 }

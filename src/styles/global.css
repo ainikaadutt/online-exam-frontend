@@ -1,24 +1,71 @@
+:root{
+
+    /* Primary Colors */
+
+    --primary:#2F855A;
+    --primary-dark:#234E52;
+
+    /* Accent Colors */
+
+    --gold:#C9A227;
+    --rose-gold:#B76E79;
+
+    /* Backgrounds */
+
+    --background:#F8F5F0;
+    --card:#FFFFFF;
+
+    /* Text */
+
+    --text:#3D3D3D;
+    --text-light:#6B7280;
+
+    /* Border */
+
+    --border:#E8E2D8;
+
+    /* Shadow */
+
+    --shadow:0 10px 30px rgba(35,78,82,.12);
+
+    /* Radius */
+
+    --radius:18px;
+
+}
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
 }
 
 body{
-    background:#f4f6fb;
-    color:#222;
-}
 
-a{
-    text-decoration:none;
+    font-family:'Poppins',sans-serif;
+    background:var(--background);
+    color:var(--text);
+
 }
 
 button{
+
     cursor:pointer;
-    transition:0.3s;
+    font-family:'Poppins',sans-serif;
+
 }
 
-button:hover{
-    transform:scale(1.03);
+input,
+textarea,
+select{
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+a{
+
+    text-decoration:none;
+    color:inherit;
+
 }
