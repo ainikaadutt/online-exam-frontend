@@ -1,20 +1,46 @@
-.primary-button{
-    background:#2563eb;
-    color:white;
-    border:none;
-    border-radius:8px;
-    padding:12px 24px;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:0.3s ease;
+/* =========================
+   EXAMVERSE BUTTON
+========================= */
+
+.primary-button {
+    background: var(--primary);
+
+    color: #FFFFFF;
+
+    border: none;
+
+    border-radius: var(--radius-md);
+
+    padding: 12px 22px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+            background 0.25s ease,
+            transform 0.2s ease,
+            box-shadow 0.25s ease;
+
+    box-shadow: 0 4px 10px rgba(47, 133, 90, 0.15);
 }
 
-.primary-button:hover{
-    background:#1d4ed8;
-    transform:translateY(-2px);
+.primary-button:hover {
+    background: var(--primary-hover);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 14px rgba(47, 133, 90, 0.2);
 }
 
-.primary-button:active{
-    transform:translateY(0px);
+.primary-button:active {
+    transform: translateY(0);
+}
+
+.primary-button:focus-visible {
+    outline: 3px solid rgba(47, 133, 90, 0.2);
+
+    outline-offset: 2px;
 }

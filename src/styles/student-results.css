@@ -1,0 +1,335 @@
+/* =========================
+   PAGE
+========================= */
+
+.page-content {
+    padding: 42px 48px 60px;
+    max-width: 1250px;
+    margin: 0 auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.page-header {
+    margin-bottom: 34px;
+}
+
+.page-header .eyebrow {
+    margin: 0 0 10px;
+
+    color: #2f8f62;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.page-header h1 {
+    margin: 0;
+
+    color: #174f54;
+
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.page-header > p:last-child {
+    margin: 10px 0 0;
+
+    color: #718096;
+
+    font-size: 15px;
+}
+
+/* =========================
+   RESULTS LIST
+========================= */
+
+.results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* =========================
+   RESULT CARD
+========================= */
+
+.result-card {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) auto auto;
+
+    align-items: center;
+
+    gap: 35px;
+
+    padding: 25px 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #e4ebe7;
+
+    border-radius: 16px;
+
+    box-shadow: 0 4px 14px rgba(23, 79, 84, 0.06);
+
+    transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
+}
+
+.result-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: 0 8px 22px rgba(23, 79, 84, 0.10);
+}
+
+/* =========================
+   RESULT INFORMATION
+========================= */
+
+.result-info h2 {
+    margin: 0 0 7px;
+
+    color: #173f44;
+
+    font-size: 19px;
+    font-weight: 650;
+}
+
+.result-info p {
+    margin: 0 0 12px;
+
+    color: #718096;
+
+    font-size: 13px;
+}
+
+.result-info span {
+    color: #526b70;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* =========================
+   SCORE
+========================= */
+
+.result-score {
+    min-width: 100px;
+
+    text-align: center;
+
+    padding: 8px 18px;
+}
+
+.result-score strong {
+    display: block;
+
+    color: #174f54;
+
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+.result-score span {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #819296;
+
+    font-size: 11px;
+}
+
+/* =========================
+   STATUS + BUTTON
+========================= */
+
+.result-status {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.status.submitted {
+    display: inline-flex;
+    align-items: center;
+
+    padding: 7px 13px;
+
+    background: rgba(47, 143, 98, 0.10);
+
+    color: #2f8f62;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* =========================
+   VIEW RESULT
+========================= */
+
+.view-result-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 10px 17px;
+
+    background: #2f8f62;
+
+    color: #ffffff !important;
+
+    border: none;
+    border-radius: 8px;
+
+    text-decoration: none !important;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+}
+
+.view-result-btn:hover {
+    background: #267b54;
+
+    color: #ffffff !important;
+
+    transform: translateY(-1px);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    padding: 55px 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e4ebe7;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    box-shadow: 0 4px 14px rgba(23, 79, 84, 0.05);
+}
+
+.empty-state h2 {
+    margin: 0 0 10px;
+
+    color: #174f54;
+
+    font-size: 21px;
+}
+
+.empty-state p {
+    margin: 0 0 22px;
+
+    color: #718096;
+
+    font-size: 14px;
+}
+
+.empty-state button {
+    padding: 11px 20px;
+
+    background: #2f8f62;
+
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.empty-state button:hover {
+    background: #267b54;
+}
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+    padding: 15px 18px;
+
+    background: rgba(190, 75, 75, 0.08);
+
+    color: #a33d3d;
+
+    border: 1px solid rgba(190, 75, 75, 0.18);
+
+    border-radius: 10px;
+
+    font-size: 13px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1000px) {
+
+    .result-card {
+        grid-template-columns: 1fr auto;
+    }
+
+    .result-status {
+        grid-column: 1 / -1;
+
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .page-content {
+        padding: 30px 20px 45px;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .result-card {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+        padding: 22px;
+    }
+
+    .result-score {
+        text-align: left;
+        padding: 0;
+    }
+
+    .result-status {
+        grid-column: auto;
+
+        justify-content: space-between;
+    }
+
+    .view-result-btn {
+        flex: 1;
+    }
+}

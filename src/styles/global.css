@@ -1,71 +1,41 @@
-:root{
+:root {
+    --primary: #2F855A;
+    --primary-dark: #234E52;
+    --primary-hover: #276749;
 
-    /* Primary Colors */
+    --background: #FAFAF8;
+    --surface: #FFFFFF;
 
-    --primary:#2F855A;
-    --primary-dark:#234E52;
+    --border: #E8E8E3;
 
-    /* Accent Colors */
+    --text-primary: #26332D;
+    --text-secondary: #718096;
+    --text-muted: #A0AEC0;
 
-    --gold:#C9A227;
-    --rose-gold:#B76E79;
+    --gold: #C9A227;
+    --rose-gold: #B76E79;
 
-    /* Backgrounds */
+    --success: #3A7D63;
+    --danger: #B94A48;
 
-    --background:#F8F5F0;
-    --card:#FFFFFF;
+    --shadow-sm: 0 2px 8px rgba(35, 78, 82, 0.06);
+    --shadow-md: 0 8px 24px rgba(35, 78, 82, 0.08);
 
-    /* Text */
-
-    --text:#3D3D3D;
-    --text-light:#6B7280;
-
-    /* Border */
-
-    --border:#E8E2D8;
-
-    /* Shadow */
-
-    --shadow:0 10px 30px rgba(35,78,82,.12);
-
-    /* Radius */
-
-    --radius:18px;
-
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
 }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
-body{
+body {
+    margin: 0;
 
-    font-family:'Poppins',sans-serif;
-    background:var(--background);
-    color:var(--text);
+    font-family: "Poppins", sans-serif;
 
-}
+    background: var(--background);
 
-button{
-
-    cursor:pointer;
-    font-family:'Poppins',sans-serif;
-
-}
-
-input,
-textarea,
-select{
-
-    font-family:'Poppins',sans-serif;
-
-}
-
-a{
-
-    text-decoration:none;
-    color:inherit;
-
+    color: var(--text-primary);
 }

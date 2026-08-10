@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
+import "../styles/manage-questions.css";
 
 function ManageQuestions() {
-
     const { examId } = useParams();
     const navigate = useNavigate();
 
     const [questions, setQuestions] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchQuestions();
-    }, []);
+    }, [examId]);
 
     const fetchQuestions = async () => {
-
         try {
-
             const token = localStorage.getItem("token");
 
             const response = await api.get(
@@ -31,22 +30,24 @@ function ManageQuestions() {
             setQuestions(response.data);
 
         } catch (error) {
-
-            console.error(error);
+            console.error("Failed to load questions:", error);
             alert("Failed to load questions");
-
+        } finally {
+            setLoading(false);
         }
-
     };
 
     const deleteQuestion = async (id) => {
 
-        if (!window.confirm("Delete this question?")) {
+        const confirmDelete = window.confirm(
+            "Are you sure you want to delete this question?"
+        );
+
+        if (!confirmDelete) {
             return;
         }
 
         try {
-
             const token = localStorage.getItem("token");
 
             await api.delete(`/questions/${id}`, {
@@ -55,96 +56,196 @@ function ManageQuestions() {
                 }
             });
 
-            alert("Question deleted");
+            alert("Question deleted successfully");
 
             fetchQuestions();
 
         } catch (error) {
-
-            console.error(error);
-
+            console.error("Failed to delete question:", error);
             alert("Failed to delete question");
-
         }
-
     };
 
+    if (loading) {
+        return (
+            <div className="manage-questions-page">
+                <div className="questions-loading">
+                    Loading questions...
+                </div>
+            </div>
+        );
+    }
+
     return (
+        <div className="manage-questions-page">
 
-        <div>
+            <div className="questions-header">
 
-            <h1>Manage Questions</h1>
+                <div>
+                    <p className="page-label">
+                        Question Management
+                    </p>
 
-            <button
-                onClick={() =>
-                    navigate(`/exams/${examId}/add-question`)
-                }
-            >
-                Add New Question
-            </button>
+                    <h1>Manage Questions</h1>
 
-            <br /><br />
+                    <p className="page-description">
+                        Create, edit and manage questions for this examination.
+                    </p>
+                </div>
 
-            <table border="1" cellPadding="10">
+                <button
+                    className="add-question-button"
+                    onClick={() =>
+                        navigate(`/exams/${examId}/add-question`)
+                    }
+                >
+                    + Add New Question
+                </button>
 
-                <thead>
+            </div>
 
-                <tr>
+            <div className="exam-info">
+                <span>Exam ID</span>
+                <strong>{examId}</strong>
+            </div>
 
-                    <th>Question</th>
+            <div className="questions-summary">
+                <span>Total Questions</span>
+                <strong>{questions.length}</strong>
+            </div>
 
-                    <th>Correct Answer</th>
+            {questions.length === 0 ? (
 
-                    <th>Actions</th>
+                <div className="no-questions">
 
-                </tr>
+                    <div className="no-questions-icon">
+                        ?
+                    </div>
 
-                </thead>
+                    <h2>No Questions Yet</h2>
 
-                <tbody>
+                    <p>
+                        This examination does not have any questions.
+                        Add your first question to get started.
+                    </p>
 
-                {questions.map((question) => (
+                    <button
+                        className="add-question-button"
+                        onClick={() =>
+                            navigate(`/exams/${examId}/add-question`)
+                        }
+                    >
+                        + Add Question
+                    </button>
 
-                    <tr key={question.id}>
+                </div>
 
-                        <td>{question.questionText}</td>
+            ) : (
 
-                        <td>{question.correctAnswer}</td>
+                <div className="questions-list">
 
-                        <td>
+                    {questions.map((question, index) => (
 
-                            <button
-                                onClick={() =>
-                                    navigate(`/edit-question/${question.id}`)
-                                }
-                            >
-                                Edit
-                            </button>
+                        <div
+                            className="question-card"
+                            key={question.id}
+                        >
 
-                            {" "}
+                            <div className="question-card-header">
 
-                            <button
-                                onClick={() =>
-                                    deleteQuestion(question.id)
-                                }
-                            >
-                                Delete
-                            </button>
+                                <div className="question-number">
+                                    Question {index + 1}
+                                </div>
 
-                        </td>
+                                <div className="question-actions">
 
-                    </tr>
+                                    <button
+                                        className="edit-button"
+                                        onClick={() =>
+                                            navigate(
+                                                `/edit-question/${question.id}`
+                                            )
+                                        }
+                                    >
+                                        Edit
+                                    </button>
 
-                ))}
+                                    <button
+                                        className="delete-button"
+                                        onClick={() =>
+                                            deleteQuestion(question.id)
+                                        }
+                                    >
+                                        Delete
+                                    </button>
 
-                </tbody>
+                                </div>
 
-            </table>
+                            </div>
+
+                            <h2 className="question-text">
+                                {question.questionText}
+                            </h2>
+
+                            <div className="options-grid">
+
+                                <div className="option">
+                                    <span className="option-label">A</span>
+                                    <span>{question.optionA}</span>
+                                </div>
+
+                                <div className="option">
+                                    <span className="option-label">B</span>
+                                    <span>{question.optionB}</span>
+                                </div>
+
+                                <div className="option">
+                                    <span className="option-label">C</span>
+                                    <span>{question.optionC}</span>
+                                </div>
+
+                                <div className="option">
+                                    <span className="option-label">D</span>
+                                    <span>{question.optionD}</span>
+                                </div>
+
+                            </div>
+
+                            <div className="correct-answer">
+
+                                <span>
+                                    Correct Answer
+                                </span>
+
+                                <strong>
+                                    {question.correctAnswer}
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    ))}
+
+                </div>
+
+            )}
+
+            <div className="back-section">
+
+                <button
+                    className="back-button"
+                    onClick={() =>
+                        navigate("/teacher/exams")
+                    }
+                >
+                    ← Back to Manage Exams
+                </button>
+
+            </div>
 
         </div>
-
     );
-
 }
 
 export default ManageQuestions;

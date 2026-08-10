@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import "../styles/manage-exams.css";
 
 function ManageExams() {
-
     const [exams, setExams] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -13,7 +15,6 @@ function ManageExams() {
 
     const fetchExams = async () => {
         try {
-
             const token = localStorage.getItem("token");
 
             const response = await api.get("/exams", {
@@ -25,13 +26,14 @@ function ManageExams() {
             setExams(response.data);
 
         } catch (error) {
-            console.error(error);
+            console.error("Failed to load exams:", error);
             alert("Failed to load exams");
+        } finally {
+            setLoading(false);
         }
     };
 
     const deleteExam = async (id) => {
-
         const confirmDelete = window.confirm(
             "Are you sure you want to delete this exam?"
         );
@@ -41,7 +43,6 @@ function ManageExams() {
         }
 
         try {
-
             const token = localStorage.getItem("token");
 
             await api.delete(`/exams/${id}`, {
@@ -55,85 +56,254 @@ function ManageExams() {
             fetchExams();
 
         } catch (error) {
-            console.error(error);
+            console.error("Failed to delete exam:", error);
             alert("Failed to delete exam");
         }
     };
 
+    const formatDateTime = (dateTime) => {
+        if (!dateTime) {
+            return "—";
+        }
+
+        return new Date(dateTime).toLocaleString();
+    };
+
     return (
-        <div>
+        <div className="manage-exams-page">
 
-            <h1>Manage Exams</h1>
+            {/* =========================
+                HEADER
+            ========================= */}
 
-            <button onClick={() => navigate("/create-exam")}>
-                Create New Exam
-            </button>
+            <div className="manage-exams-header">
 
-            <br /><br />
+                <div>
+                    <p className="manage-eyebrow">
+                        Examination Management
+                    </p>
 
-            <table border="1" cellPadding="10">
+                    <h1>Manage Exams</h1>
 
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Duration</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
+                    <p>
+                        Create, edit and manage your examinations.
+                    </p>
+                </div>
 
-                <tbody>
+                <button
+                    className="create-exam-btn"
+                    onClick={() =>
+                        navigate("/teacher/exams/create")
+                    }
+                >
+                    + Create New Exam
+                </button>
 
-                {exams.map((exam) => (
+            </div>
 
-                    <tr key={exam.id}>
+            {/* =========================
+                EXAM COUNT
+            ========================= */}
 
-                        <td>{exam.title}</td>
+            <div className="exam-summary">
+                <span>
+                    Total Exams
+                </span>
 
-                        <td>{exam.description}</td>
+                <strong>
+                    {exams.length}
+                </strong>
+            </div>
 
-                        <td>{exam.duration} mins</td>
+            {/* =========================
+                LOADING
+            ========================= */}
 
-                        <td>{exam.startTime}</td>
+            {loading && (
+                <div className="exam-empty-state">
+                    <h2>Loading exams...</h2>
+                    <p>
+                        Please wait while we load your examinations.
+                    </p>
+                </div>
+            )}
 
-                        <td>{exam.endTime}</td>
+            {/* =========================
+                NO EXAMS
+            ========================= */}
 
-                        <td>
+            {!loading && exams.length === 0 && (
+                <div className="exam-empty-state">
 
-                            <button
-                                onClick={() => navigate(`/teacher/exams/edit/${exam.id}`)}
-                            >
-                                Edit
-                            </button>
+                    <div className="empty-icon">
+                        📋
+                    </div>
 
-                            {" "}
+                    <h2>No Exams Yet</h2>
 
-                            <button
-                                onClick={() => deleteExam(exam.id)}
-                            >
-                                Delete
-                            </button>
+                    <p>
+                        You haven't created any examinations yet.
+                    </p>
 
-                            {" "}
+                    <button
+                        className="create-exam-btn"
+                        onClick={() =>
+                            navigate("/teacher/exams/create")
+                        }
+                    >
+                        Create Your First Exam
+                    </button>
 
-                            <button
-                                onClick={() =>
-                                    navigate(`/teacher/exams/${exam.id}/questions`)                                }
-                            >
-                                Questions
-                            </button>
+                </div>
+            )}
 
-                        </td>
+            {/* =========================
+                EXAMS
+            ========================= */}
 
-                    </tr>
+            {!loading && exams.length > 0 && (
 
-                ))}
+                <div className="exams-table-card">
 
-                </tbody>
+                    <div className="table-header">
 
-            </table>
+                        <div>
+                            <h2>Your Examinations</h2>
+
+                            <p>
+                                View and manage all created exams.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div className="table-wrapper">
+
+                        <table className="exams-table">
+
+                            <thead>
+
+                            <tr>
+                                <th>Exam</th>
+                                <th>Duration</th>
+                                <th>Start Time</th>
+                                <th>End Time</th>
+                                <th>Actions</th>
+                            </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                            {exams.map((exam) => (
+
+                                <tr key={exam.id}>
+
+                                    {/* Exam */}
+
+                                    <td>
+                                        <div className="exam-title">
+
+                                            <div className="exam-icon">
+                                                📖
+                                            </div>
+
+                                            <div>
+                                                <h3>
+                                                    {exam.title}
+                                                </h3>
+
+                                                <p>
+                                                    {exam.description ||
+                                                        "No description provided"}
+                                                </p>
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                    {/* Duration */}
+
+                                    <td>
+                                            <span className="duration">
+                                                {exam.duration} mins
+                                            </span>
+                                    </td>
+
+                                    {/* Start */}
+
+                                    <td>
+                                            <span className="date-time">
+                                                {formatDateTime(
+                                                    exam.startTime
+                                                )}
+                                            </span>
+                                    </td>
+
+                                    {/* End */}
+
+                                    <td>
+                                            <span className="date-time">
+                                                {formatDateTime(
+                                                    exam.endTime
+                                                )}
+                                            </span>
+                                    </td>
+
+                                    {/* Actions */}
+
+                                    <td>
+
+                                        <div className="exam-actions">
+
+                                            <button
+                                                className="action-btn questions"
+                                                onClick={() =>
+                                                    navigate(
+                                                        `/teacher/exams/${exam.id}/questions`
+                                                    )
+                                                }
+                                            >
+                                                Questions
+                                            </button>
+
+                                            <button
+                                                className="action-btn edit"
+                                                onClick={() =>
+                                                    navigate(
+                                                        `/teacher/exams/edit/${exam.id}`
+                                                    )
+                                                }
+                                            >
+                                                Edit
+                                            </button>
+
+                                            <button
+                                                className="action-btn delete"
+                                                onClick={() =>
+                                                    deleteExam(exam.id)
+                                                }
+                                            >
+                                                Delete
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+                                </tr>
+
+                            ))}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+            )}
 
         </div>
     );

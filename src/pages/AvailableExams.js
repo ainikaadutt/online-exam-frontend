@@ -1,6 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaBookOpen, FaClock, FaArrowRight } from "react-icons/fa";
+
 import api from "../services/api";
+
+import DashboardLayout from "../components/layout/DashboardLayout";
+import PageHeader from "../components/common/PageHeader";
+
+import "../styles/available-exams.css";
 
 function AvailableExams() {
 
@@ -37,63 +44,112 @@ function AvailableExams() {
 
     return (
 
-        <div>
+        <DashboardLayout
+            title="Available Exams"
+            role="STUDENT"
+        >
 
-            <h1>Available Exams</h1>
+            <PageHeader
+                greeting="Ready to learn? 📚"
+                title="Available Exams"
+                description="Choose an examination and test your knowledge."
+            />
 
-            <table border="1" cellPadding="10">
+            {exams.length === 0 ? (
 
-                <thead>
+                <div className="exam-empty-state">
 
-                <tr>
+                    <div className="empty-icon">
+                        <FaBookOpen />
+                    </div>
 
-                    <th>Title</th>
+                    <h2>
+                        No exams available
+                    </h2>
 
-                    <th>Description</th>
+                    <p>
+                        There are currently no examinations available.
+                        Please check again later.
+                    </p>
 
-                    <th>Duration</th>
+                </div>
 
-                    <th>Action</th>
+            ) : (
 
-                </tr>
+                <div className="available-exams-list">
 
-                </thead>
+                    {exams.map((exam) => (
 
-                <tbody>
+                        <div
+                            className="available-exam-card"
+                            key={exam.id}
+                        >
 
-                {exams.map((exam) => (
+                            <div className="exam-card-main">
 
-                    <tr key={exam.id}>
+                                <div className="exam-card-icon">
+                                    <FaBookOpen />
+                                </div>
 
-                        <td>{exam.title}</td>
+                                <div className="exam-card-content">
 
-                        <td>{exam.description}</td>
+                                    <div className="exam-card-title-row">
 
-                        <td>{exam.duration} mins</td>
+                                        <h2>
+                                            {exam.title}
+                                        </h2>
 
-                        <td>
+                                        <span className="exam-status">
+                                            Available
+                                        </span>
+
+                                    </div>
+
+                                    <p className="exam-description">
+                                        {exam.description ||
+                                            "Test your knowledge with this examination."}
+                                    </p>
+
+                                    <div className="exam-meta">
+
+                                        <span>
+                                            <FaClock />
+                                            {exam.duration} mins
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
 
                             <button
+                                className="start-exam-button"
                                 onClick={() =>
-                                    navigate(`/student/exams/${exam.id}`)                                }
+                                    navigate(
+                                        `/student/exams/${exam.id}`
+                                    )
+                                }
                             >
+
                                 Start Exam
+
+                                <FaArrowRight />
+
                             </button>
 
-                        </td>
+                        </div>
 
-                    </tr>
+                    ))}
 
-                ))}
+                </div>
 
-                </tbody>
+            )}
 
-            </table>
-
-        </div>
+        </DashboardLayout>
 
     );
-
 }
 
 export default AvailableExams;

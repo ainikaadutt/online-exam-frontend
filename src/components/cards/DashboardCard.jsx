@@ -1,19 +1,26 @@
 import "../../styles/cards.css";
 
-function DashboardCard({ title, value }) {
+function DashboardCard({ icon, title, value }) {
 
     return (
 
         <div className="dashboard-card">
 
-            <h3>{title}</h3>
+            <div className="dashboard-card-icon">
+                {icon}
+            </div>
 
-            <h1>{value}</h1>
+            <h3>
+                {title}
+            </h3>
+
+            <h1>
+                {value}
+            </h1>
 
         </div>
 
     );
-
 }
 
 export default DashboardCard;

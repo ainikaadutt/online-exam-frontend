@@ -1,29 +1,103 @@
-.dashboard-card{
+/* =========================
+   EXAMVERSE STAT CARDS
+========================= */
 
-    width:220px;
+.dashboard-card {
+    width: 100%;
+    min-height: 190px;
 
-    background:white;
+    background: var(--surface);
 
-    border-radius:12px;
+    border: 1px solid var(--border);
 
-    padding:25px;
+    border-radius: var(--radius-lg);
 
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
+    padding: 22px 26px;
 
+    box-shadow: var(--shadow-sm);
+
+    transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease,
+            border-color 0.25s ease;
 }
 
-.dashboard-card h3{
+.dashboard-card:hover {
+    transform: translateY(-3px);
 
-    color:#6B7280;
+    box-shadow: var(--shadow-md);
 
-    margin-bottom:15px;
-
+    border-color: rgba(47, 133, 90, 0.25);
 }
 
-.dashboard-card h1{
 
-    color:#2563EB;
+/* =========================
+   ICON
+========================= */
 
-    font-size:38px;
+.dashboard-card-icon {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 18px;
+
+    border-radius: 12px;
+
+    background: rgba(47, 133, 90, 0.10);
+
+    color: var(--primary);
+
+    font-size: 17px;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.dashboard-card h3 {
+    margin: 0 0 10px;
+
+    color: var(--text-secondary);
+
+    font-size: 14px;
+
+    font-weight: 500;
+}
+
+
+/* =========================
+   VALUE
+========================= */
+
+.dashboard-card h1 {
+    margin: 0;
+
+    color: var(--primary-dark);
+
+    font-size: 38px;
+
+    line-height: 1;
+
+    font-weight: 600;
+
+    letter-spacing: -1px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 650px) {
+
+    .dashboard-card {
+        min-height: 170px;
+        padding: 20px;
+    }
 
 }

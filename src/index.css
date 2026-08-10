@@ -1,13 +1,90 @@
+:root {
+  /* =========================
+     EXAMVERSE COLORS
+  ========================= */
+
+  --primary: #2F855A;
+  --primary-dark: #234E52;
+  --primary-hover: #276749;
+
+  --background: #FAFAF8;
+  --surface: #FFFFFF;
+
+  --border: #E8E8E3;
+
+  --text-primary: #26332D;
+  --text-secondary: #718096;
+  --text-muted: #A0AEC0;
+
+  --gold: #C9A227;
+  --rose-gold: #B76E79;
+
+  --success: #3A7D63;
+  --danger: #B94A48;
+
+  --shadow-sm: 0 2px 8px rgba(35, 78, 82, 0.06);
+  --shadow-md: 0 8px 24px rgba(35, 78, 82, 0.08);
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+}
+
+/* =========================
+   GLOBAL RESET
+========================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  sans-serif;
+
+  background: var(--background);
+  color: var(--text-primary);
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* =========================
+   GLOBAL ELEMENTS
+========================= */
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+input,
+textarea,
+select {
+  outline: none;
+}
+
+::selection {
+  background: rgba(47, 133, 90, 0.18);
+  color: var(--primary-dark);
 }

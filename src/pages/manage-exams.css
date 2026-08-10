@@ -1,0 +1,433 @@
+/* =========================
+   PAGE
+========================= */
+
+.manage-exams-page {
+    padding: 42px 48px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.manage-exams-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 30px;
+}
+
+.manage-eyebrow {
+    margin: 0 0 9px;
+
+    color: #2f8f62;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.manage-exams-header h1 {
+    margin: 0;
+
+    color: #174f54;
+
+    font-size: 34px;
+    font-weight: 700;
+
+    letter-spacing: -0.5px;
+}
+
+.manage-exams-header p:last-child {
+    margin: 9px 0 0;
+
+    color: #718096;
+
+    font-size: 15px;
+}
+
+/* =========================
+   CREATE BUTTON
+========================= */
+
+.create-exam-btn {
+    padding: 12px 20px;
+
+    background: #2f8f62;
+
+    color: #ffffff;
+
+    border: none;
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+}
+
+.create-exam-btn:hover {
+    background: #267b54;
+
+    transform: translateY(-1px);
+}
+
+/* =========================
+   SUMMARY
+========================= */
+
+.exam-summary {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+
+    padding: 10px 16px;
+
+    background: rgba(47, 143, 98, 0.08);
+
+    border: 1px solid rgba(47, 143, 98, 0.12);
+
+    border-radius: 10px;
+}
+
+.exam-summary span {
+    color: #60777b;
+
+    font-size: 12px;
+}
+
+.exam-summary strong {
+    color: #174f54;
+
+    font-size: 17px;
+}
+
+/* =========================
+   TABLE CARD
+========================= */
+
+.exams-table-card {
+    background: #ffffff;
+
+    border: 1px solid #e4ebe7;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 14px rgba(23, 79, 84, 0.06);
+}
+
+.table-header {
+    padding: 24px 26px;
+
+    border-bottom: 1px solid #e4ebe7;
+}
+
+.table-header h2 {
+    margin: 0;
+
+    color: #174f54;
+
+    font-size: 18px;
+    font-weight: 650;
+}
+
+.table-header p {
+    margin: 5px 0 0;
+
+    color: #718096;
+
+    font-size: 12px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+.exams-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 950px;
+}
+
+.exams-table th {
+    padding: 15px 22px;
+
+    background: #f8faf9;
+
+    color: #61777b;
+
+    border-bottom: 1px solid #e4ebe7;
+
+    text-align: left;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+.exams-table td {
+    padding: 19px 22px;
+
+    border-bottom: 1px solid #edf1ef;
+
+    vertical-align: middle;
+}
+
+.exams-table tbody tr {
+    transition: background 0.2s ease;
+}
+
+.exams-table tbody tr:hover {
+    background: #fbfdfc;
+}
+
+.exams-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* =========================
+   EXAM INFO
+========================= */
+
+.exam-title {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    min-width: 280px;
+}
+
+.exam-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    background: #eaf4ef;
+
+    border-radius: 11px;
+
+    font-size: 18px;
+}
+
+.exam-title h3 {
+    margin: 0;
+
+    color: #173f44;
+
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.exam-title p {
+    max-width: 300px;
+
+    margin: 4px 0 0;
+
+    color: #718096;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* =========================
+   DURATION
+========================= */
+
+.duration {
+    display: inline-block;
+
+    padding: 6px 10px;
+
+    background: #f4f8f6;
+
+    color: #52706b;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* =========================
+   DATE TIME
+========================= */
+
+.date-time {
+    color: #61777b;
+
+    font-size: 11px;
+
+    white-space: nowrap;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.exam-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+.action-btn {
+    padding: 7px 11px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            transform 0.2s ease;
+}
+
+.action-btn:hover {
+    transform: translateY(-1px);
+}
+
+.action-btn.questions {
+    background: #eaf4ef;
+
+    color: #2f8f62;
+
+    border: 1px solid #dcece4;
+}
+
+.action-btn.questions:hover {
+    background: #dff0e7;
+}
+
+.action-btn.edit {
+    background: #f5f8f7;
+
+    color: #315f63;
+
+    border: 1px solid #e1e8e5;
+}
+
+.action-btn.edit:hover {
+    background: #edf3f0;
+}
+
+.action-btn.delete {
+    background: #fff5f4;
+
+    color: #b04a45;
+
+    border: 1px solid #f0dedd;
+}
+
+.action-btn.delete:hover {
+    background: #ffebe9;
+}
+
+/* =========================
+   EMPTY / LOADING
+========================= */
+
+.exam-empty-state {
+    padding: 65px 30px;
+
+    background: #ffffff;
+
+    border: 1px solid #e4ebe7;
+
+    border-radius: 16px;
+
+    text-align: center;
+
+    box-shadow: 0 4px 14px rgba(23, 79, 84, 0.05);
+}
+
+.empty-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 58px;
+    height: 58px;
+
+    margin: 0 auto 18px;
+
+    background: #eaf4ef;
+
+    border-radius: 15px;
+
+    font-size: 24px;
+}
+
+.exam-empty-state h2 {
+    margin: 0 0 9px;
+
+    color: #174f54;
+
+    font-size: 20px;
+}
+
+.exam-empty-state p {
+    margin: 0 0 22px;
+
+    color: #718096;
+
+    font-size: 13px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    .manage-exams-page {
+        padding: 30px 22px 45px;
+    }
+
+    .manage-exams-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .create-exam-btn {
+        width: 100%;
+    }
+}

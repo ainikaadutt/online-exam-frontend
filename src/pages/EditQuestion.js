@@ -3,7 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
 
 function EditQuestion() {
-
     const { id } = useParams();
     const navigate = useNavigate();
 
@@ -14,15 +13,14 @@ function EditQuestion() {
     const [optionD, setOptionD] = useState("");
     const [correctAnswer, setCorrectAnswer] = useState("");
     const [examId, setExamId] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        loadQuestion();
-    }, []);
+        fetchQuestion();
+    }, [id]);
 
-    const loadQuestion = async () => {
-
+    const fetchQuestion = async () => {
         try {
-
             const token = localStorage.getItem("token");
 
             const response = await api.get(`/questions/${id}`, {
@@ -33,42 +31,46 @@ function EditQuestion() {
 
             const question = response.data;
 
-            setQuestionText(question.questionText);
-            setOptionA(question.optionA);
-            setOptionB(question.optionB);
-            setOptionC(question.optionC);
-            setOptionD(question.optionD);
-            setCorrectAnswer(question.correctAnswer);
-            setExamId(question.exam.id);
+            setQuestionText(question.questionText || "");
+            setOptionA(question.optionA || "");
+            setOptionB(question.optionB || "");
+            setOptionC(question.optionC || "");
+            setOptionD(question.optionD || "");
+            setCorrectAnswer(
+                question.correctAnswer
+                    ? question.correctAnswer.toUpperCase()
+                    : ""
+            );
+
+            if (question.exam) {
+                setExamId(question.exam.id);
+            }
 
         } catch (error) {
-
-            console.error(error);
+            console.error("Failed to load question:", error);
             alert("Failed to load question");
-
+        } finally {
+            setLoading(false);
         }
-
     };
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
 
         try {
-
             const token = localStorage.getItem("token");
 
             await api.put(
                 `/questions/${id}`,
                 {
-                    questionText,
-                    optionA,
-                    optionB,
-                    optionC,
-                    optionD,
-                    correctAnswer,
+                    questionText: questionText.trim(),
+                    optionA: optionA.trim(),
+                    optionB: optionB.trim(),
+                    optionC: optionC.trim(),
+                    optionD: optionD.trim(),
+                    correctAnswer: correctAnswer,
                     exam: {
-                        id: examId
+                        id: Number(examId)
                     }
                 },
                 {
@@ -80,91 +82,365 @@ function EditQuestion() {
 
             alert("Question updated successfully");
 
-            navigate(`/exams/${examId}/questions`);
+            if (examId) {
+                navigate(`/teacher/exams/${examId}/questions`);
+            } else {
+                navigate(-1);
+            }
 
         } catch (error) {
+            console.error("Failed to update question:", error);
 
-            console.error(error);
+            if (error.response) {
+                console.error(
+                    "Backend response:",
+                    error.response.data
+                );
+            }
+
             alert("Failed to update question");
-
         }
-
     };
 
+    if (loading) {
+        return (
+            <div style={styles.loading}>
+                Loading question...
+            </div>
+        );
+    }
+
     return (
-        <div>
+        <div style={styles.page}>
 
-            <h1>Edit Question</h1>
+            <div style={styles.container}>
 
-            <form onSubmit={handleSubmit}>
+                <div style={styles.header}>
 
-                <textarea
-                    placeholder="Question"
-                    value={questionText}
-                    onChange={(e) => setQuestionText(e.target.value)}
-                    required
-                />
+                    <p style={styles.label}>
+                        Question Management
+                    </p>
 
-                <br /><br />
+                    <h1 style={styles.title}>
+                        Edit Question
+                    </h1>
 
-                <input
-                    type="text"
-                    placeholder="Option A"
-                    value={optionA}
-                    onChange={(e) => setOptionA(e.target.value)}
-                    required
-                />
+                    <p style={styles.subtitle}>
+                        Update the question and its correct answer.
+                    </p>
 
-                <br /><br />
+                </div>
 
-                <input
-                    type="text"
-                    placeholder="Option B"
-                    value={optionB}
-                    onChange={(e) => setOptionB(e.target.value)}
-                    required
-                />
+                <div style={styles.card}>
 
-                <br /><br />
+                    {examId && (
+                        <div style={styles.examInfo}>
+                            Exam ID <strong>{examId}</strong>
+                        </div>
+                    )}
 
-                <input
-                    type="text"
-                    placeholder="Option C"
-                    value={optionC}
-                    onChange={(e) => setOptionC(e.target.value)}
-                    required
-                />
+                    <form onSubmit={handleSubmit}>
 
-                <br /><br />
+                        {/* Question */}
 
-                <input
-                    type="text"
-                    placeholder="Option D"
-                    value={optionD}
-                    onChange={(e) => setOptionD(e.target.value)}
-                    required
-                />
+                        <div style={styles.formGroup}>
 
-                <br /><br />
+                            <label style={styles.formLabel}>
+                                Question
+                            </label>
 
-                <input
-                    type="text"
-                    placeholder="Correct Answer"
-                    value={correctAnswer}
-                    onChange={(e) => setCorrectAnswer(e.target.value)}
-                    required
-                />
+                            <textarea
+                                value={questionText}
+                                onChange={(e) =>
+                                    setQuestionText(e.target.value)
+                                }
+                                required
+                                rows="4"
+                                style={styles.textarea}
+                            />
 
-                <br /><br />
+                        </div>
 
-                <button type="submit">
-                    Update Question
-                </button>
+                        {/* Option A */}
 
-            </form>
+                        <div style={styles.formGroup}>
+
+                            <label style={styles.formLabel}>
+                                Option A
+                            </label>
+
+                            <input
+                                type="text"
+                                value={optionA}
+                                onChange={(e) =>
+                                    setOptionA(e.target.value)
+                                }
+                                required
+                                style={styles.input}
+                            />
+
+                        </div>
+
+                        {/* Option B */}
+
+                        <div style={styles.formGroup}>
+
+                            <label style={styles.formLabel}>
+                                Option B
+                            </label>
+
+                            <input
+                                type="text"
+                                value={optionB}
+                                onChange={(e) =>
+                                    setOptionB(e.target.value)
+                                }
+                                required
+                                style={styles.input}
+                            />
+
+                        </div>
+
+                        {/* Option C */}
+
+                        <div style={styles.formGroup}>
+
+                            <label style={styles.formLabel}>
+                                Option C
+                            </label>
+
+                            <input
+                                type="text"
+                                value={optionC}
+                                onChange={(e) =>
+                                    setOptionC(e.target.value)
+                                }
+                                required
+                                style={styles.input}
+                            />
+
+                        </div>
+
+                        {/* Option D */}
+
+                        <div style={styles.formGroup}>
+
+                            <label style={styles.formLabel}>
+                                Option D
+                            </label>
+
+                            <input
+                                type="text"
+                                value={optionD}
+                                onChange={(e) =>
+                                    setOptionD(e.target.value)
+                                }
+                                required
+                                style={styles.input}
+                            />
+
+                        </div>
+
+                        {/* Correct Answer */}
+
+                        <div style={styles.formGroup}>
+
+                            <label style={styles.formLabel}>
+                                Correct Answer
+                            </label>
+
+                            <select
+                                value={correctAnswer}
+                                onChange={(e) =>
+                                    setCorrectAnswer(e.target.value)
+                                }
+                                required
+                                style={styles.input}
+                            >
+                                <option value="">
+                                    Select correct option
+                                </option>
+
+                                <option value="A">
+                                    A
+                                </option>
+
+                                <option value="B">
+                                    B
+                                </option>
+
+                                <option value="C">
+                                    C
+                                </option>
+
+                                <option value="D">
+                                    D
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        {/* Buttons */}
+
+                        <div style={styles.buttonContainer}>
+
+                            <button
+                                type="button"
+                                onClick={() =>
+                                    examId
+                                        ? navigate(
+                                            `/teacher/exams/${examId}/questions`
+                                        )
+                                        : navigate(-1)
+                                }
+                                style={styles.cancelButton}
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="submit"
+                                style={styles.submitButton}
+                            >
+                                Update Question
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
 
         </div>
     );
 }
+
+const styles = {
+    page: {
+        minHeight: "100vh",
+        padding: "40px",
+        background: "#f8faf9",
+        boxSizing: "border-box"
+    },
+
+    container: {
+        maxWidth: "900px",
+        margin: "0 auto"
+    },
+
+    header: {
+        marginBottom: "30px"
+    },
+
+    label: {
+        color: "#2f855a",
+        fontSize: "14px",
+        fontWeight: "600",
+        marginBottom: "8px"
+    },
+
+    title: {
+        margin: "0",
+        color: "#174c55",
+        fontSize: "36px",
+        fontWeight: "700"
+    },
+
+    subtitle: {
+        color: "#718096",
+        fontSize: "16px",
+        marginTop: "10px"
+    },
+
+    card: {
+        background: "#ffffff",
+        border: "1px solid #e2e8e4",
+        borderRadius: "16px",
+        padding: "32px",
+        boxShadow: "0 4px 15px rgba(0,0,0,0.05)"
+    },
+
+    examInfo: {
+        marginBottom: "28px",
+        padding: "12px 16px",
+        background: "#edf7f1",
+        borderRadius: "8px",
+        color: "#2f855a",
+        fontSize: "14px"
+    },
+
+    formGroup: {
+        marginBottom: "22px"
+    },
+
+    formLabel: {
+        display: "block",
+        marginBottom: "8px",
+        color: "#174c55",
+        fontSize: "14px",
+        fontWeight: "600"
+    },
+
+    input: {
+        width: "100%",
+        padding: "12px 14px",
+        border: "1px solid #d8e1dc",
+        borderRadius: "8px",
+        fontSize: "14px",
+        boxSizing: "border-box",
+        outline: "none"
+    },
+
+    textarea: {
+        width: "100%",
+        padding: "12px 14px",
+        border: "1px solid #d8e1dc",
+        borderRadius: "8px",
+        fontSize: "14px",
+        boxSizing: "border-box",
+        resize: "vertical",
+        fontFamily: "inherit",
+        outline: "none"
+    },
+
+    buttonContainer: {
+        display: "flex",
+        justifyContent: "flex-end",
+        gap: "12px",
+        marginTop: "30px"
+    },
+
+    cancelButton: {
+        padding: "12px 22px",
+        border: "1px solid #d8e1dc",
+        borderRadius: "8px",
+        background: "#ffffff",
+        color: "#174c55",
+        fontWeight: "600",
+        cursor: "pointer"
+    },
+
+    submitButton: {
+        padding: "12px 24px",
+        border: "none",
+        borderRadius: "8px",
+        background: "#2f855a",
+        color: "#ffffff",
+        fontWeight: "600",
+        cursor: "pointer"
+    },
+
+    loading: {
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#174c55",
+        fontSize: "18px"
+    }
+};
 
 export default EditQuestion;

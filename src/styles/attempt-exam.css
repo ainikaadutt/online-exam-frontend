@@ -1,0 +1,631 @@
+/* =========================
+   EXAM PAGE
+========================= */
+
+.exam-page {
+    min-height: 100vh;
+
+    background: var(--background);
+
+    color: var(--text-primary);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.exam-header {
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 42px;
+
+    background: var(--surface);
+
+    border-bottom: 1px solid var(--border);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.exam-brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.exam-brand-icon {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: var(--primary);
+
+    color: #FFFFFF;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+.exam-brand h2 {
+    margin: 0;
+
+    color: var(--primary-dark);
+
+    font-size: 18px;
+
+    font-weight: 600;
+}
+
+.exam-brand p {
+    margin: 2px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 10px;
+}
+
+.exam-header-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.exam-header-info span {
+    color: var(--text-secondary);
+
+    font-size: 12px;
+}
+
+.exam-header-info strong {
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    background: rgba(47, 133, 90, 0.10);
+
+    color: var(--primary);
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.exam-container {
+    width: 100%;
+
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    padding: 38px 28px 60px;
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.exam-title-section {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 28px;
+}
+
+.exam-eyebrow {
+    margin: 0 0 6px;
+
+    color: var(--primary);
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+.exam-title-section h1 {
+    margin: 0;
+
+    color: var(--primary-dark);
+
+    font-size: 30px;
+
+    font-weight: 600;
+}
+
+.exam-title-section p {
+    margin: 7px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+}
+
+.question-count {
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+
+    padding: 11px 15px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: var(--surface);
+
+    color: var(--primary);
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+/* =========================
+   PROGRESS
+========================= */
+
+.exam-progress {
+    margin-bottom: 25px;
+
+    padding: 17px 20px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-md);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.progress-info {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+
+    color: var(--text-secondary);
+
+    font-size: 11px;
+}
+
+.progress-info strong {
+    color: var(--primary-dark);
+
+    font-weight: 600;
+}
+
+.progress-track {
+    width: 100%;
+
+    height: 7px;
+
+    overflow: hidden;
+
+    border-radius: 10px;
+
+    background: #E8EFEA;
+}
+
+.progress-fill {
+    height: 100%;
+
+    border-radius: 10px;
+
+    background: var(--primary);
+
+    transition: width 0.3s ease;
+}
+
+
+/* =========================
+   QUESTIONS
+========================= */
+
+.questions-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.question-card {
+    padding: 25px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    transition:
+            border-color 0.25s ease,
+            box-shadow 0.25s ease;
+}
+
+.question-card:hover {
+    border-color: rgba(47, 133, 90, 0.20);
+
+    box-shadow: var(--shadow-md);
+}
+
+
+/* =========================
+   QUESTION HEADER
+========================= */
+
+.question-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 16px;
+}
+
+.question-number {
+    color: var(--primary);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+.answered-badge {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   QUESTION TEXT
+========================= */
+
+.question-text {
+    margin: 0 0 20px;
+
+    color: var(--text-primary);
+
+    font-size: 17px;
+
+    line-height: 1.55;
+
+    font-weight: 600;
+}
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+.exam-option {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 13px 15px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: #FCFCFA;
+
+    cursor: pointer;
+
+    transition:
+            background 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+}
+
+.exam-option:hover {
+    border-color: rgba(47, 133, 90, 0.30);
+
+    background: rgba(47, 133, 90, 0.03);
+
+    transform: translateX(2px);
+}
+
+.exam-option.selected {
+    border-color: var(--primary);
+
+    background: rgba(47, 133, 90, 0.07);
+}
+
+
+/* Hide default radio */
+
+.exam-option input {
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+/* Option letter */
+
+.option-letter {
+    width: 30px;
+    height: 30px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: var(--surface);
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.exam-option.selected .option-letter {
+    border-color: var(--primary);
+
+    background: var(--primary);
+
+    color: #FFFFFF;
+}
+
+
+/* Option text */
+
+.option-text {
+    color: var(--text-primary);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   SUBMIT SECTION
+========================= */
+
+.exam-submit-section {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-top: 28px;
+
+    padding: 22px 24px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+}
+
+.exam-submit-section h3 {
+    margin: 0;
+
+    color: var(--primary-dark);
+
+    font-size: 15px;
+
+    font-weight: 600;
+}
+
+.exam-submit-section p {
+    margin: 5px 0 0;
+
+    color: var(--text-secondary);
+
+    font-size: 12px;
+}
+
+.submit-exam-button {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    flex-shrink: 0;
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: var(--radius-md);
+
+    background: var(--primary);
+
+    color: #FFFFFF;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+            background 0.25s ease,
+            transform 0.2s ease,
+            box-shadow 0.25s ease;
+}
+
+.submit-exam-button:hover {
+    background: var(--primary-hover);
+
+    transform: translateY(-2px);
+
+    box-shadow: 0 6px 14px rgba(47, 133, 90, 0.18);
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.exam-loading {
+    padding: 60px 30px;
+
+    text-align: center;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+}
+
+.loading-icon {
+    width: 55px;
+    height: 55px;
+
+    margin: 0 auto 17px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: rgba(47, 133, 90, 0.10);
+
+    color: var(--primary);
+
+    font-size: 22px;
+}
+
+.exam-loading h2 {
+    margin: 0 0 7px;
+
+    color: var(--primary-dark);
+
+    font-size: 18px;
+}
+
+.exam-loading p {
+    margin: 0;
+
+    color: var(--text-secondary);
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+    .exam-header {
+        padding: 0 20px;
+    }
+
+    .exam-header-info span {
+        display: none;
+    }
+
+    .exam-container {
+        padding: 28px 18px 45px;
+    }
+
+    .exam-title-section {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .question-count {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .exam-submit-section {
+        align-items: stretch;
+
+        flex-direction: column;
+    }
+
+    .submit-exam-button {
+        width: 100%;
+    }
+
+}

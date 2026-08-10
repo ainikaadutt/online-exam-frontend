@@ -1,23 +1,47 @@
-.dashboard-container{
+/* =========================
+   EXAMVERSE DASHBOARD LAYOUT
+========================= */
 
-    display:flex;
+.dashboard-container {
+    display: flex;
 
-    min-height:100vh;
+    min-height: 100vh;
+
+    background: var(--background);
+}
+
+.dashboard-content {
+    flex: 1;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: var(--background);
+}
+
+.page-content {
+    padding: 36px 40px;
+
+    width: 100%;
+}
+
+/* Responsive */
+
+@media (max-width: 900px) {
+
+    .page-content {
+        padding: 28px 24px;
+    }
 
 }
 
-.dashboard-content{
+@media (max-width: 600px) {
 
-    flex:1;
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.page-content{
-
-    padding:30px;
+    .page-content {
+        padding: 22px 16px;
+    }
 
 }

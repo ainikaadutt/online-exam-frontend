@@ -1,31 +1,48 @@
-.navbar{
+/* =========================
+   EXAMVERSE NAVBAR
+========================= */
 
-    height:70px;
+.navbar {
+    height: 76px;
 
-    background:white;
+    background: var(--surface);
 
-    display:flex;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    justify-content:space-between;
+    padding: 0 32px;
 
-    align-items:center;
+    border-bottom: 1px solid var(--border);
 
-    padding:0 30px;
-
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
-
+    box-shadow: var(--shadow-sm);
 }
 
-.navbar h2{
+/* Page title */
 
-    color:#1E293B;
+.navbar h2 {
+    color: var(--primary-dark);
 
+    font-size: 21px;
+    font-weight: 600;
 }
 
-.user-info{
+/* Right side */
 
-    font-weight:600;
+.user-info {
+    color: var(--primary-dark);
 
-    color:#2563EB;
+    font-size: 14px;
+    font-weight: 500;
 
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+/* Hover-safe */
+
+.user-info:hover {
+    color: var(--primary);
 }
