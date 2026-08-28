@@ -75,7 +75,6 @@ function Sidebar({ role }) {
                             >
                                 Create Exam
                             </Link>
-
                             <Link
                                 className={
                                     location.pathname === "/teacher/exams"
@@ -85,6 +84,18 @@ function Sidebar({ role }) {
                                 to="/teacher/exams"
                             >
                                 Manage Exams
+                            </Link>
+
+                            <Link
+                                className={
+                                    location.pathname.startsWith("/teacher/question-exams") ||
+                                    location.pathname.includes("/questions")
+                                        ? "sub-active"
+                                        : ""
+                                }
+                                to="/teacher/question-exams"
+                            >
+                                Manage Questions
                             </Link>
 
                         </div>

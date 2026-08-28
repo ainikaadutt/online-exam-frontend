@@ -406,7 +406,7 @@ function TeacherDashboard() {
 
                         <button
                             onClick={() =>
-                                navigate("/teacher/exams")
+                                navigate("/teacher/question-exams")
                             }
                         >
                             Open

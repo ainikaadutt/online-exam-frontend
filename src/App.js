@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import ManageQuestionExams from "./pages/ManageQuestionExams";
 import AttemptExam from "./pages/AttemptExam";
 import ManageQuestions from "./pages/ManageQuestions";
 import Login from "./pages/Login";
@@ -15,7 +15,6 @@ import AvailableExams from "./pages/AvailableExams";
 import StudentResult from "./pages/StudentResult";
 import StudentResults from "./pages/StudentResults";
 import TeacherResults from "./pages/TeacherResults";
-
 import ProtectedRoute from "./components/common/ProtectedRoute";
 
 function App() {
@@ -152,6 +151,14 @@ function App() {
                     }
                 />
 
+                <Route
+                    path="/teacher/question-exams"
+                    element={
+                        <ProtectedRoute allowedRole="TEACHER">
+                            <ManageQuestionExams />
+                        </ProtectedRoute>
+                    }
+                />
 
                 {/* =========================
                     TEACHER - MANAGE EXAMS
@@ -165,6 +172,7 @@ function App() {
                         </ProtectedRoute>
                     }
                 />
+
 
 
                 {/* =========================

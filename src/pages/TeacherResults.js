@@ -129,9 +129,11 @@ function TeacherResults() {
 
                 <div>
 
-                    <span>
-                        Submitted Examinations
-                    </span>
+                    {/*<span>*/}
+                    {/*    Submitted Examinations*/}
+                    {/*</span>*/}
+
+                    <span> Submitted Attempts </span>
 
                     <strong>
                         {attempts.length}
