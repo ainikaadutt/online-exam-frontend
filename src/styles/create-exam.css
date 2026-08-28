@@ -1,0 +1,402 @@
+/* =========================
+   CREATE EXAM PAGE
+   ========================= */
+
+.create-exam-page {
+    min-height: 100vh;
+    padding: 55px 6%;
+    background: #fafbf9;
+}
+
+
+/* =========================
+   HEADER
+   ========================= */
+
+.create-exam-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+
+.create-exam-eyebrow {
+    margin: 0 0 12px;
+    color: #2d8b62;
+    font-size: 17px;
+    font-weight: 700;
+}
+
+
+.create-exam-header h1 {
+    margin: 0 0 12px;
+    color: #164d5d;
+    font-size: 46px;
+    font-weight: 800;
+}
+
+
+.create-exam-header p:last-child {
+    margin: 0;
+    color: #7182a0;
+    font-size: 19px;
+}
+
+
+/* =========================
+   BACK BUTTON
+   ========================= */
+
+.back-exams-button {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    padding: 13px 20px;
+
+    background: white;
+    border: 1px solid #dce7e3;
+    border-radius: 10px;
+
+    color: #164d5d;
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.back-exams-button:hover {
+    background: #f1f7f4;
+    border-color: #2d8b62;
+}
+
+
+/* =========================
+   MAIN CARD
+   ========================= */
+
+.create-exam-card {
+    max-width: 1000px;
+    margin: 0 auto;
+
+    background: white;
+
+    border: 1px solid #e1e9e5;
+    border-radius: 18px;
+
+    box-shadow: 0 8px 30px rgba(27, 65, 67, 0.07);
+
+    overflow: hidden;
+}
+
+
+/* =========================
+   CARD HEADER
+   ========================= */
+
+.create-exam-card-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    padding: 30px 38px;
+
+    border-bottom: 1px solid #e8eeeb;
+}
+
+
+.create-exam-icon {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #eaf5ef;
+
+    border-radius: 14px;
+
+    color: #2d8b62;
+    font-size: 23px;
+}
+
+
+.create-exam-card-header h2 {
+    margin: 0 0 6px;
+
+    color: #164d5d;
+    font-size: 23px;
+}
+
+
+.create-exam-card-header p {
+    margin: 0;
+
+    color: #7182a0;
+    font-size: 15px;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+.create-exam-form {
+    padding: 38px;
+}
+
+
+.form-group {
+    margin-bottom: 27px;
+}
+
+
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    margin-bottom: 9px;
+
+    color: #164d5d;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 14px 16px;
+
+    background: #fff;
+
+    border: 1px solid #d9e3df;
+    border-radius: 10px;
+
+    color: #164d5d;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #2d8b62;
+
+    box-shadow: 0 0 0 3px rgba(45, 139, 98, 0.10);
+}
+
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #9aa7b9;
+}
+
+
+/* =========================
+   DURATION
+   ========================= */
+
+.input-with-icon {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+
+.input-with-icon > svg {
+    position: absolute;
+    left: 16px;
+
+    color: #2d8b62;
+}
+
+
+.input-with-icon input {
+    padding-left: 43px;
+    padding-right: 85px;
+}
+
+
+.input-with-icon span {
+    position: absolute;
+    right: 16px;
+
+    color: #7182a0;
+    font-size: 14px;
+}
+
+
+/* =========================
+   DATE TIME
+   ========================= */
+
+.datetime-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+
+.datetime-grid .form-group label svg {
+    color: #2d8b62;
+}
+
+
+.datetime-grid input {
+    cursor: pointer;
+}
+
+
+/* =========================
+   ACTIONS
+   ========================= */
+
+.create-exam-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+
+    margin-top: 10px;
+    padding-top: 28px;
+
+    border-top: 1px solid #e8eeeb;
+}
+
+
+.cancel-exam-button,
+.create-exam-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    min-width: 130px;
+
+    padding: 13px 22px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.cancel-exam-button {
+    background: white;
+
+    border: 1px solid #d9e3df;
+
+    color: #164d5d;
+}
+
+
+.cancel-exam-button:hover {
+    background: #f5f7f6;
+}
+
+
+.create-exam-button {
+    background: #2d8b62;
+
+    border: 1px solid #2d8b62;
+
+    color: white;
+}
+
+
+.create-exam-button:hover {
+    background: #267954;
+}
+
+
+.create-exam-button:disabled,
+.cancel-exam-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 800px) {
+
+    .create-exam-page {
+        padding: 35px 5%;
+    }
+
+
+    .create-exam-header {
+        flex-direction: column;
+    }
+
+
+    .create-exam-header h1 {
+        font-size: 36px;
+    }
+
+
+    .back-exams-button {
+        align-self: flex-start;
+    }
+
+
+    .datetime-grid {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .create-exam-form {
+        padding: 25px 20px;
+    }
+
+
+    .create-exam-card-header {
+        padding: 25px 20px;
+    }
+
+
+    .create-exam-actions {
+        flex-direction: column-reverse;
+    }
+
+
+    .cancel-exam-button,
+    .create-exam-button {
+        width: 100%;
+    }
+
+}
