@@ -131,7 +131,7 @@ function TeacherResults() {
 
                     {/*<span>*/}
                     {/*    Submitted Examinations*/}
-                    {/*</span>*/}
+                    {/*</span>*/}npm
 
                     <span> Submitted Attempts </span>
 
