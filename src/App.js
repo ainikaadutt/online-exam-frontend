@@ -123,6 +123,15 @@ function App() {
                     }
                 />
 
+                <Route
+                    path="/teacher/results/:attemptId"
+                    element={
+                        <ProtectedRoute allowedRole="TEACHER">
+                            <StudentResult />
+                        </ProtectedRoute>
+                    }
+                />
+
 
                 {/* =========================
                     TEACHER RESULTS

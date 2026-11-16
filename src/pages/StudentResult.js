@@ -1,6 +1,11 @@
 
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import {
+    useParams,
+    useNavigate,
+    useLocation
+} from "react-router-dom";
+
 import {
     FaCheckCircle,
     FaTrophy,
@@ -16,6 +21,19 @@ function StudentResult() {
 
     const { attemptId } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    // Detect whether the result is being viewed by a teacher or student
+    const isTeacher = location.pathname.startsWith("/teacher/");
+    const userRole = isTeacher ? "TEACHER" : "STUDENT";
+
+    const resultsPath = isTeacher
+        ? "/teacher/results"
+        : "/student/results";
+
+    const dashboardPath = isTeacher
+        ? "/teacher/dashboard"
+        : "/student/dashboard";
 
     const [attempt, setAttempt] = useState(null);
     const [responses, setResponses] = useState([]);
@@ -23,45 +41,70 @@ function StudentResult() {
     const [error, setError] = useState("");
 
     useEffect(() => {
+
+        const fetchResult = async () => {
+
+            try {
+
+                setLoading(true);
+                setError("");
+
+                const token = localStorage.getItem("token");
+
+                const config = {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                };
+
+                // Fetch examination attempt details
+                const attemptResponse = await api.get(
+                    `/attempts/${attemptId}`,
+                    config
+                );
+
+                setAttempt(attemptResponse.data);
+
+                // Fetch question-wise answers
+                const responseData = await api.get(
+                    `/attempts/${attemptId}/responses`,
+                    config
+                );
+
+                setResponses(
+                    Array.isArray(responseData.data)
+                        ? responseData.data
+                        : []
+                );
+
+            } catch (err) {
+
+                console.error("Failed to load result:", err);
+
+                setError(
+                    err.response?.data?.message ||
+                    "Unable to load examination result."
+                );
+
+            } finally {
+
+                setLoading(false);
+
+            }
+        };
+
         fetchResult();
+
     }, [attemptId]);
 
-    const fetchResult = async () => {
-        try {
-            const token = localStorage.getItem("token");
-
-            const config = {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            };
-
-            const attemptResponse = await api.get(
-                `/attempts/${attemptId}`,
-                config
-            );
-
-            setAttempt(attemptResponse.data);
-
-            const responseData = await api.get(
-                `/attempts/${attemptId}/responses`,
-                config
-            );
-
-            setResponses(responseData.data || []);
-
-        } catch (err) {
-            console.error("Failed to load result:", err);
-            setError("Unable to load examination result.");
-        } finally {
-            setLoading(false);
-        }
-    };
-
+    // Convert option letter into actual option text
     const getOptionText = (question, answer) => {
-        if (!answer) return "Not Answered";
 
-        const option = answer.toUpperCase();
+        if (!answer) {
+            return "Not Answered";
+        }
+
+        const option = String(answer).toUpperCase().trim();
 
         return question?.["option" + option] || answer;
     };
@@ -72,105 +115,198 @@ function StudentResult() {
 
     const incorrectCount = responses.length - correctCount;
 
+    // Loading screen
     if (loading) {
+
         return (
-            <DashboardLayout title="Result" role="STUDENT">
+            <DashboardLayout
+                title="Exam Result"
+                role={userRole}
+            >
                 <div className="result-loading">
-                    <h2>Loading your result...</h2>
+                    <h2>Loading examination result...</h2>
                 </div>
             </DashboardLayout>
         );
     }
 
+    // Error screen
     if (error || !attempt) {
+
         return (
-            <DashboardLayout title="Result" role="STUDENT">
+            <DashboardLayout
+                title="Exam Result"
+                role={userRole}
+            >
                 <div className="result-loading">
-                    <h2>{error || "Result not found"}</h2>
+
+                    <h2>
+                        {error || "Result not found"}
+                    </h2>
+
                     <button
                         className="result-back-button"
-                        onClick={() => navigate("/student/results")}
+                        onClick={() => navigate(resultsPath)}
                     >
-                        <FaArrowLeft /> Back to Results
+                        <FaArrowLeft />
+                        Back to Results
                     </button>
+
                 </div>
             </DashboardLayout>
         );
     }
 
     return (
-        <DashboardLayout title="Exam Result" role="STUDENT">
+
+        <DashboardLayout
+            title="Exam Result"
+            role={userRole}
+        >
 
             <div className="result-page">
 
+                {/* Result Header */}
+
                 <div className="result-header">
+
                     <p>EXAMINATION COMPLETED</p>
-                    <h1>Your Result</h1>
+
+                    <h1>
+                        {isTeacher
+                            ? "Student Examination Result"
+                            : "Your Result"}
+                    </h1>
+
                     <span>
                         {attempt.exam?.title || "Examination"}
                     </span>
+
                 </div>
 
+
+                {/* Score Card */}
+
                 <div className="result-score-card">
+
                     <div className="result-trophy">
                         <FaTrophy />
                     </div>
 
-                    <p className="score-label">Your Score</p>
+                    <p className="score-label">
+                        Score
+                    </p>
 
-                    <h2>{attempt.score ?? 0}</h2>
+                    <h2>
+                        {attempt.score ?? 0}
+                    </h2>
 
                     <p className="score-message">
                         Marks obtained
                     </p>
 
                     <div className="submitted-badge">
+
                         <FaCheckCircle />
-                        {attempt.submitted ? "Exam Submitted" : "Not Submitted"}
+
+                        {attempt.submitted
+                            ? "Exam Submitted"
+                            : "Not Submitted"}
+
                     </div>
+
                 </div>
+
+
+                {/* Result Details */}
 
                 <div className="result-details">
 
                     <div className="result-detail">
+
                         <span>Attempt ID</span>
-                        <strong>#{attempt.id}</strong>
+
+                        <strong>
+                            #{attempt.id}
+                        </strong>
+
                     </div>
 
+                    {isTeacher && (
+
+                        <div className="result-detail">
+
+                            <span>Student Name</span>
+
+                            <strong>
+                                {attempt.student?.name || "Unknown Student"}
+                            </strong>
+
+                        </div>
+
+                    )}
+
                     <div className="result-detail">
+
                         <span>Total Questions Answered</span>
-                        <strong>{responses.length}</strong>
+
+                        <strong>
+                            {responses.length}
+                        </strong>
+
                     </div>
 
                     <div className="result-detail">
+
                         <span>Correct Answers</span>
-                        <strong>{correctCount}</strong>
+
+                        <strong>
+                            {correctCount}
+                        </strong>
+
                     </div>
 
                     <div className="result-detail">
+
                         <span>Incorrect Answers</span>
-                        <strong>{incorrectCount}</strong>
+
+                        <strong>
+                            {incorrectCount}
+                        </strong>
+
                     </div>
 
                 </div>
+
+
+                {/* Question-wise Answer Review */}
 
                 <div className="answer-review">
 
                     <h2>Answer Review</h2>
 
                     {responses.length === 0 ? (
-                        <p>No answer details available.</p>
+
+                        <p>
+                            No answer details available.
+                        </p>
+
                     ) : (
 
                         responses.map((response, index) => {
 
                             const question = response.question;
-                            const isCorrect = Number(response.marks) > 0;
+
+                            const isCorrect =
+                                Number(response.marks) > 0;
 
                             return (
+
                                 <div
                                     className={`answer-review-card ${
-                                        isCorrect ? "correct" : "incorrect"
+                                        isCorrect
+                                            ? "correct"
+                                            : "incorrect"
                                     }`}
                                     key={response.id}
                                 >
@@ -182,64 +318,110 @@ function StudentResult() {
                                         </h3>
 
                                         <span>
+
                                             {isCorrect ? (
-                                                <><FaCheckCircle /> Correct</>
+                                                <>
+                                                    <FaCheckCircle />
+                                                    Correct
+                                                </>
                                             ) : (
-                                                <><FaTimesCircle /> Incorrect</>
+                                                <>
+                                                    <FaTimesCircle />
+                                                    Incorrect
+                                                </>
                                             )}
+
                                         </span>
 
                                     </div>
 
+
                                     <p className="review-question">
-                                        {question?.questionText || "Question unavailable"}
+
+                                        {question?.questionText ||
+                                            "Question unavailable"}
+
                                     </p>
 
+
                                     <div className="review-answer">
+
                                         <span>Your Answer</span>
+
                                         <strong>
+
                                             {getOptionText(
                                                 question,
                                                 response.selectedAnswer
                                             )}
+
                                         </strong>
+
                                     </div>
 
+
                                     <div className="review-answer">
+
                                         <span>Correct Answer</span>
+
                                         <strong>
+
                                             {getOptionText(
                                                 question,
                                                 question?.correctAnswer
                                             )}
+
                                         </strong>
+
                                     </div>
 
+
                                     <div className="review-marks">
-                                        Marks Obtained: {response.marks ?? 0}
+
+                                        Marks Obtained:{" "}
+                                        {response.marks ?? 0}
+
                                     </div>
 
                                 </div>
+
                             );
+
                         })
+
                     )}
 
                 </div>
 
+
+                {/* Navigation Buttons */}
+
                 <div className="result-actions">
 
+                    {!isTeacher && (
+
+                        <button
+                            className="result-primary-button"
+                            onClick={() => navigate("/student/exams")}
+                        >
+                            Take Another Exam
+                        </button>
+
+                    )}
+
                     <button
-                        className="result-primary-button"
-                        onClick={() => navigate("/student/exams")}
+                        className="result-secondary-button"
+                        onClick={() => navigate(resultsPath)}
                     >
-                        Take Another Exam
+                        <FaArrowLeft />
+                        Back to Results
                     </button>
 
                     <button
                         className="result-secondary-button"
-                        onClick={() => navigate("/student/results")}
+                        onClick={() => navigate(dashboardPath)}
                     >
-                        Back to My Results
+                        Back to Dashboard
                     </button>
 
                 </div>
@@ -247,7 +429,9 @@ function StudentResult() {
             </div>
 
         </DashboardLayout>
+
     );
 }
 
 export default StudentResult;
+
