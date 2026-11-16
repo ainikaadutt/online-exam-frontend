@@ -96,7 +96,7 @@ function StudentDashboard() {
                         title="My Results"
                         description="View your examination results"
                         onClick={() =>
-                            navigate("/my-results")
+                            navigate("/student/results")
                         }
                     />
 
